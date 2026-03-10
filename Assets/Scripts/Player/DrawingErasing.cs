@@ -63,6 +63,8 @@ public class DrawingErasing : MonoBehaviour
         currentLine.SetPosition(0, pos);
 
         lastPoint = pos;
+
+        if (inkChecker.ink <= 0f) StopDrawing();
     }
 
     void ContinueDrawing()
@@ -116,7 +118,6 @@ public class DrawingErasing : MonoBehaviour
 
         Vector3 erasePos = GetMouseWorld();
 
-        // Find all lines with tag "Draw"
         GameObject[] lines = GameObject.FindGameObjectsWithTag("Ground");
         foreach (GameObject lineObj in lines)
         {

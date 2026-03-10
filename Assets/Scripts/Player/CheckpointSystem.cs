@@ -7,17 +7,23 @@ public class CheckpointSystem : MonoBehaviour
     public float inkMax = 100f;
     private float lastInk;
 
+    [HideInInspector] public float cost;
+    public float coins;
+
+    [HideInInspector] public float sharpener;
+    [HideInInspector] public float sharpenerMax;
+
     public TMP_Text inkText;
+    public TMP_Text funds;
 
     public DrawingErasing pencil;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ink = inkMax;
+        UpdateFunds();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (ink != lastInk)
@@ -26,5 +32,28 @@ public class CheckpointSystem : MonoBehaviour
             inkText.text = inkPercentage + "%";
             lastInk = ink;
         }
+    }
+
+    void UpdateFunds()
+    {
+        funds.text = coins + " coins";
+    }
+
+    public void Purchase()
+    {
+        if (cost > coins)
+            return;
+
+        coins -= cost;
+
+        float inkBefore = ink;
+
+        ink = Mathf.Clamp(ink + sharpener, 0, inkMax);
+
+        float inkUsed = ink - inkBefore;
+
+        sharpenerMax = Mathf.Max(0, sharpenerMax - inkUsed);
+
+        UpdateFunds();
     }
 }

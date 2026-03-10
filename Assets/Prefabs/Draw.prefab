@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8210493112643854793}
   - component: {fileID: 165496974859456022}
   m_Layer: 0
-  m_Name: BrushSample
+  m_Name: Draw
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,8 +129,8 @@ LineRenderer:
       m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
+    numCornerVertices: 5
+    numCapVertices: 5
     alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}

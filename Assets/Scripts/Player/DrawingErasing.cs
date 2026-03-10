@@ -8,22 +8,29 @@ public class DrawingErasing : MonoBehaviour
 
     [Header("Settings")]
     public float pointDistance = 0.01f;
-    public float eraseRadius = 0.25f;
+    [HideInInspector] public float eraseRadius;
+    [HideInInspector] public float brushSize;
+    public float minBrushSize = 0.1f;
+    public float maxBrushSize = 1f;
 
     private LineRenderer currentLine;
     private EdgeCollider2D currentEdge;
     private Vector3 lastPoint;
     private Camera mainCamera;
 
+    public CheckpointSystem inkChecker;
+
     private void Awake()
     {
         mainCamera = Camera.main;
+        brushSize = minBrushSize;
     }
 
     private void Update()
     {
         HandleDrawing();
         HandleErasing();
+        HandleBrushSize();
     }
 
     // ============================
@@ -48,16 +55,12 @@ public class DrawingErasing : MonoBehaviour
         currentLine = lineObj.GetComponent<LineRenderer>();
         currentEdge = lineObj.GetComponent<EdgeCollider2D>();
 
-        Vector3 pos = GetMouseWorld();
-        currentLine.positionCount = 2;
-        currentLine.SetPosition(0, pos);
-        currentLine.SetPosition(1, pos);
+        currentLine.startWidth = brushSize;
+        currentLine.endWidth = brushSize;
 
-        currentEdge.points = new Vector2[]
-        {
-            new Vector2(pos.x, pos.y),
-            new Vector2(pos.x, pos.y)
-        };
+        Vector3 pos = GetMouseWorld();
+        currentLine.positionCount = 1;
+        currentLine.SetPosition(0, pos);
 
         lastPoint = pos;
     }
@@ -67,13 +70,20 @@ public class DrawingErasing : MonoBehaviour
         if (currentLine == null) return;
 
         Vector3 pos = GetMouseWorld();
-        if (Vector3.Distance(pos, lastPoint) > pointDistance)
+        if (Vector3.Distance(pos, lastPoint) >= pointDistance)
         {
-            currentLine.positionCount++;
-            int index = currentLine.positionCount - 1;
-            currentLine.SetPosition(index, pos);
-            UpdateEdgeCollider(currentLine, currentEdge);
+            int count = currentLine.positionCount;
+            currentLine.positionCount = count + 1;
+            currentLine.SetPosition(count, pos);
+
+            if (currentEdge != null)
+                UpdateEdgeCollider(currentLine, currentEdge);
+
             lastPoint = pos;
+
+            inkChecker.ink -= brushSize * 0.01f;
+            inkChecker.ink = Mathf.Max(inkChecker.ink, 0f);
+            if (inkChecker.ink <= 0f) StopDrawing();
         }
     }
 
@@ -181,5 +191,24 @@ public class DrawingErasing : MonoBehaviour
         Vector3 pos = Input.mousePosition;
         pos.z = 10f;
         return mainCamera.ScreenToWorldPoint(pos);
+    }
+
+    // ============================
+    //  BRUSH SIZE (Scroll Wheel)
+    // ============================
+
+    void HandleBrushSize()
+    {
+        transform.position = GetMouseWorld();
+        transform.localScale = Vector3.one * brushSize * 10f;
+        float scroll = Input.mouseScrollDelta.y;
+
+        if (scroll != 0)
+        {
+            brushSize += scroll * 0.1f;
+            brushSize = Mathf.Clamp(brushSize, minBrushSize, maxBrushSize);
+        }
+
+        eraseRadius = brushSize;
     }
 }

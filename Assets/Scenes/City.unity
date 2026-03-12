@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1551,7 +1551,8 @@ GameObject:
   - component: {fileID: 1567432461}
   - component: {fileID: 1567432463}
   - component: {fileID: 1567432464}
-  m_Layer: 0
+  - component: {fileID: 1567432465}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1727,7 +1728,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fec564ee1cd754496dfb803bb2a4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 0
+  startingHealth: 3
+  iFramesDuration: 2
+  numberOfFlashes: 3
+  components:
+  - {fileID: 1567432463}
+--- !u!114 &1567432465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567432458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f992095d6b5c19e4383ffd95cb9ec69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpointSound: {fileID: 0}
 --- !u!1 &1805405869
 GameObject:
   m_ObjectHideFlags: 0
@@ -2271,6 +2289,7 @@ MonoBehaviour:
   inkText: {fileID: 791368957}
   funds: {fileID: 100697696}
   pencil: {fileID: 1808569363}
+  reset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

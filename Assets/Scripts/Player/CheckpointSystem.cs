@@ -16,7 +16,7 @@ public class CheckpointSystem : MonoBehaviour
     public TMP_Text inkText;
     public TMP_Text funds;
 
-    public DrawingErasing pencil;
+    [SerializeField] private DrawingErasing pencil;
 
     void Start()
     {

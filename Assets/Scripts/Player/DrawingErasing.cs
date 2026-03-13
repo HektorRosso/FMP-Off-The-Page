@@ -13,6 +13,10 @@ public class DrawingErasing : MonoBehaviour
     public float minBrushSize = 0.1f;
     public float maxBrushSize = 1f;
 
+    [Header("Visuals")]
+    [SerializeField] private GameObject pencil;
+    [SerializeField] private GameObject eraser;
+
     private LineRenderer currentLine;
     private EdgeCollider2D currentEdge;
     private Vector3 lastPoint;
@@ -31,6 +35,28 @@ public class DrawingErasing : MonoBehaviour
         HandleDrawing();
         HandleErasing();
         HandleBrushSize();
+        UpdateVisuals();
+    }
+
+    void UpdateVisuals()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            pencil.SetActive(true);
+        }
+        else
+        {
+            pencil.SetActive(false);
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            eraser.SetActive(true);
+        }
+        else
+        {
+            eraser.SetActive(false);
+        }
     }
 
     // ============================

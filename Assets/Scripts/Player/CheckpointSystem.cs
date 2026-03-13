@@ -41,7 +41,7 @@ public class CheckpointSystem : MonoBehaviour
 
     public void Purchase()
     {
-        if (cost > coins)
+        if (cost > coins || cost == 0)
             return;
 
         coins -= cost;

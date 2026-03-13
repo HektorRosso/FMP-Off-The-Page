@@ -17,10 +17,13 @@ public class Health : MonoBehaviour
     [SerializeField] private Behaviour[] components;
     private bool invulnerable;
 
+    CheckpointSystem checkpointSystem;
+
     private void Awake()
     {
         currentHealth = startingHealth;
         spriteRend = GetComponent<SpriteRenderer>();
+        checkpointSystem = GameObject.Find("GameCanvas").GetComponent<CheckpointSystem>();
     }
 
     public void TakeDamage(float damage)
@@ -41,6 +44,7 @@ public class Health : MonoBehaviour
                     component.enabled = false;
 
                 dead = true;
+                Respawn();
             }
         }
     }
@@ -58,10 +62,13 @@ public class Health : MonoBehaviour
 
     public void Respawn()
     {
+        if (checkpointSystem.currentCheckpoint == null)
+            return;
+
         dead = false;
         AddHealth(startingHealth);
         StartCoroutine(Invulnerability());
-
+        transform.position = checkpointSystem.currentCheckpoint.position;
         foreach (Behaviour component in components)
             component.enabled = true;
     }

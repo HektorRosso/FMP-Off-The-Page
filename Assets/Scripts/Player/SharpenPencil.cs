@@ -41,7 +41,7 @@ public class SharpenPencil : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
-            sharpenerCanvas.SetActive(true);
+        { sharpenerCanvas.SetActive(true); GameObject.Find("GameCanvas").GetComponent<CheckpointSystem>().currentCheckpoint = transform; }
     }
 
     private void OnTriggerExit2D(Collider2D collider)

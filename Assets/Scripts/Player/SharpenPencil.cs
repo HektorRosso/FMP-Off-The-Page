@@ -4,9 +4,9 @@ using TMPro;
 public class SharpenPencil : MonoBehaviour
 {
     [HideInInspector] public float sharpenerInk;
-    public float sharpenerInkMax;
+    public float sharpenerInkMax = 5;
 
-    public CheckpointSystem inkChecker;
+    public CheckpointSystem player;
 
     public GameObject sharpenerCanvas;
     public TMP_Text sharpenerHeader;
@@ -15,37 +15,45 @@ public class SharpenPencil : MonoBehaviour
 
     void Start()
     {
+        sharpenerInk = sharpenerInkMax;
         sharpenerCanvas.SetActive(false);
-        inkChecker.sharpenerMax = sharpenerInkMax;
     }
 
     void Update()
     {
-        float missingInk = inkChecker.inkMax - inkChecker.ink;
+        // Only update UI if this is the current checkpoint
+        if (player.currentCheckpoint != transform)
+            return;
 
-        sharpenerInk = Mathf.Min(missingInk, inkChecker.sharpenerMax);
+        float missingInk = player.inkMax - player.ink;
+        float refillAmount = Mathf.Min(missingInk, sharpenerInk);
 
-        float refillPercent = Mathf.RoundToInt((sharpenerInk / inkChecker.inkMax) * 100);
-        float sharpenerRemainingPercent = Mathf.RoundToInt((sharpenerInkMax / inkChecker.inkMax) * 100);
+        float refillPercent = Mathf.RoundToInt((refillAmount / player.inkMax) * 100);
+        float remainingPercent = Mathf.RoundToInt((sharpenerInk / player.inkMax) * 100);
 
-        inkChecker.sharpener = sharpenerInk;
-        sharpenerInkMax = inkChecker.sharpenerMax;
+        float cost = refillPercent * 10;
 
-        inkChecker.cost = refillPercent * 10;
-
-        sharpenerHeader.text = "This sharpener has " + sharpenerRemainingPercent + "% of ink left";
+        sharpenerHeader.text = "This sharpener has " + remainingPercent + "% of ink left";
         sharpenerText.text = "Refill " + refillPercent + "% of ink for";
-        sharpenerCost.text = inkChecker.cost + " coins";
+        sharpenerCost.text = cost + " coins";
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (collider.CompareTag("Player"))
-        { sharpenerCanvas.SetActive(true); GameObject.Find("GameCanvas").GetComponent<CheckpointSystem>().currentCheckpoint = transform; }
+        if (col.CompareTag("Player"))
+        {
+            sharpenerCanvas.SetActive(true);
+            player.currentCheckpoint = transform;
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
+    private void OnTriggerExit2D(Collider2D col)
     {
-        sharpenerCanvas.SetActive(false);
+        if (col.CompareTag("Player"))
+        {
+            sharpenerCanvas.SetActive(false);
+            if (player.currentCheckpoint == transform)
+                player.currentCheckpoint = null;
+        }
     }
 }

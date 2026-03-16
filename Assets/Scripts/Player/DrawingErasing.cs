@@ -8,6 +8,7 @@ public class DrawingErasing : MonoBehaviour
 
     [Header("Settings")]
     public float pointDistance = 0.01f;
+    [HideInInspector] public float drawRadius;
     [HideInInspector] public float eraseRadius;
     [HideInInspector] public float brushSize;
     public float minBrushSize = 0.1f;
@@ -24,45 +25,65 @@ public class DrawingErasing : MonoBehaviour
 
     public CheckpointSystem inkChecker;
 
+    private float lastBrushSize;
+
     private void Awake()
     {
         mainCamera = Camera.main;
         brushSize = minBrushSize;
+        lastBrushSize = brushSize;
     }
 
     private void Update()
     {
+        HandleBrushSize();   // check brush size first
         HandleDrawing();
         HandleErasing();
-        HandleBrushSize();
         UpdateVisuals();
     }
 
+    // ============================
+    // VISUALS
+    // ============================
     void UpdateVisuals()
     {
-        if (Input.GetMouseButton(0))
-        {
-            pencil.SetActive(true);
-        }
-        else
-        {
-            pencil.SetActive(false);
-        }
+        pencil.SetActive(Input.GetMouseButton(0));
+        eraser.SetActive(Input.GetMouseButton(1));
 
-        if (Input.GetMouseButton(1))
-        {
-            eraser.SetActive(true);
-        }
-        else
+        transform.position = GetMouseWorld();
+    }
+
+    // ============================
+    // BRUSH SIZE (Scroll Wheel)
+    // ============================
+    void HandleBrushSize()
+    {
+        transform.position = GetMouseWorld();
+        transform.localScale = Vector3.one * brushSize * 10f;
+        float scroll = Input.mouseScrollDelta.y;
+        if (scroll != 0)
         {
             eraser.SetActive(false);
+            brushSize += scroll * 0.1f;
+            brushSize = Mathf.Clamp(brushSize, minBrushSize, maxBrushSize);
+
+            drawRadius = brushSize;
+            eraseRadius = brushSize;
+
+            // If drawing and brush size changed, start new line segment
+            if (currentLine != null && brushSize != lastBrushSize)
+            {
+                StopDrawing();
+                StartDrawing();
+            }
+
+            lastBrushSize = brushSize;
         }
     }
 
     // ============================
     //  DRAWING (Left Click)
     // ============================
-
     void HandleDrawing()
     {
         if (Input.GetMouseButtonDown(0))
@@ -77,6 +98,8 @@ public class DrawingErasing : MonoBehaviour
 
     void StartDrawing()
     {
+        if (inkChecker.ink <= 0f) return;
+
         GameObject lineObj = Instantiate(drawPrefab);
         currentLine = lineObj.GetComponent<LineRenderer>();
         currentEdge = lineObj.GetComponent<EdgeCollider2D>();
@@ -89,8 +112,6 @@ public class DrawingErasing : MonoBehaviour
         currentLine.SetPosition(0, pos);
 
         lastPoint = pos;
-
-        if (inkChecker.ink <= 0f) StopDrawing();
     }
 
     void ContinueDrawing()
@@ -111,7 +132,8 @@ public class DrawingErasing : MonoBehaviour
 
             inkChecker.ink -= brushSize * 0.01f;
             inkChecker.ink = Mathf.Max(inkChecker.ink, 0f);
-            if (inkChecker.ink <= 0f) StopDrawing();
+            if (inkChecker.ink <= 0f)
+                StopDrawing();
         }
     }
 
@@ -137,7 +159,6 @@ public class DrawingErasing : MonoBehaviour
     // ============================
     //  ERASING (Right Click)
     // ============================
-
     void HandleErasing()
     {
         if (!Input.GetMouseButton(1)) return;
@@ -218,24 +239,5 @@ public class DrawingErasing : MonoBehaviour
         Vector3 pos = Input.mousePosition;
         pos.z = 10f;
         return mainCamera.ScreenToWorldPoint(pos);
-    }
-
-    // ============================
-    //  BRUSH SIZE (Scroll Wheel)
-    // ============================
-
-    void HandleBrushSize()
-    {
-        transform.position = GetMouseWorld();
-        transform.localScale = Vector3.one * brushSize * 10f;
-        float scroll = Input.mouseScrollDelta.y;
-
-        if (scroll != 0)
-        {
-            brushSize += scroll * 0.1f;
-            brushSize = Mathf.Clamp(brushSize, minBrushSize, maxBrushSize);
-        }
-
-        eraseRadius = brushSize;
     }
 }

@@ -3,37 +3,38 @@ using TMPro;
 
 public class CheckpointSystem : MonoBehaviour
 {
-    [HideInInspector] public float ink;
+    [Header("Player Ink")]
+    public float ink;
     public float inkMax = 100f;
     private float lastInk;
 
-    [HideInInspector] public float cost;
+    [Header("Currency")]
     public float coins;
 
-    [HideInInspector] public float sharpener;
-    [HideInInspector] public float sharpenerMax;
-
+    [Header("UI")]
     public TMP_Text inkText;
     public TMP_Text funds;
 
-    public Transform currentCheckpoint;
-
-    [SerializeField] private DrawingErasing pencil;
+    [HideInInspector] public Transform currentCheckpoint;
 
     void Start()
     {
         ink = inkMax;
+        UpdateInk();
         UpdateFunds();
     }
 
     void Update()
     {
         if (ink != lastInk)
-        {
-            float inkPercentage = Mathf.RoundToInt((ink / inkMax) * 100);
-            inkText.text = inkPercentage + "%";
-            lastInk = ink;
-        }
+            UpdateInk();
+    }
+
+    void UpdateInk()
+    {
+        float percent = Mathf.RoundToInt((ink / inkMax) * 100);
+        inkText.text = percent + "%";
+        lastInk = ink;
     }
 
     void UpdateFunds()
@@ -43,18 +44,26 @@ public class CheckpointSystem : MonoBehaviour
 
     public void Purchase()
     {
-        if (cost > coins || cost == 0)
+        if (currentCheckpoint == null)
+            return;
+
+        // Get the Sharpener component from the current checkpoint
+        SharpenPencil sharpener = currentCheckpoint.GetComponent<SharpenPencil>();
+        if (sharpener == null)
+            return;
+
+        float missingInk = inkMax - ink;
+        float refillAmount = Mathf.Min(missingInk, sharpener.sharpenerInk);
+
+        float refillPercent = Mathf.RoundToInt((refillAmount / inkMax) * 100);
+        float cost = refillPercent * 10;
+
+        if (coins < cost)
             return;
 
         coins -= cost;
-
-        float inkBefore = ink;
-
-        ink = Mathf.Clamp(ink + sharpener, 0, inkMax);
-
-        float inkUsed = ink - inkBefore;
-
-        sharpenerMax = Mathf.Max(0, sharpenerMax - inkUsed);
+        ink += refillAmount;
+        sharpener.sharpenerInk -= refillAmount;
 
         UpdateFunds();
     }

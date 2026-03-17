@@ -19,7 +19,6 @@ public class CheckpointSystem : MonoBehaviour
 
     void Start()
     {
-        ink = inkMax;
         UpdateInk();
         UpdateFunds();
     }

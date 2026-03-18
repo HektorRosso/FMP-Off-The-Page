@@ -8,8 +8,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body;
     private bool grounded;
 
+    public AudioSource audioSource;
+    public AudioClip jump;
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         body = GetComponent<Rigidbody2D>();
     }
 
@@ -29,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        audioSource.PlayOneShot(jump);
         body.linearVelocity = new Vector2(body.linearVelocity.x, speed);
         grounded = false;
     }

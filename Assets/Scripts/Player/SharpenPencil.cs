@@ -12,8 +12,12 @@ public class SharpenPencil : MonoBehaviour
     public TMP_Text sharpenerHeader;
     public TMP_Text sharpenerCost;
 
+    public AudioSource audioSource;
+    public AudioClip checkpoint;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         sharpenerInk = sharpenerInkMax;
         sharpenerCanvas.SetActive(false);
     }
@@ -40,6 +44,7 @@ public class SharpenPencil : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            audioSource.PlayOneShot(checkpoint);
             sharpenerCanvas.SetActive(true);
             player.currentCheckpoint = transform;
         }

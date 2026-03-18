@@ -10,7 +10,6 @@ public class SharpenPencil : MonoBehaviour
 
     public GameObject sharpenerCanvas;
     public TMP_Text sharpenerHeader;
-    public TMP_Text sharpenerText;
     public TMP_Text sharpenerCost;
 
     void Start()
@@ -33,9 +32,8 @@ public class SharpenPencil : MonoBehaviour
 
         float cost = refillPercent * 10;
 
-        sharpenerHeader.text = "This sharpener has " + remainingPercent + "% of ink left";
-        sharpenerText.text = "Refill " + refillPercent + "% of ink for";
-        sharpenerCost.text = cost + " coins";
+        sharpenerHeader.text = "This sharpener has " + remainingPercent + "% of power left";
+        sharpenerCost.text = "Refill " + refillPercent + "% for " + cost + " coins";
     }
 
     private void OnTriggerEnter2D(Collider2D col)

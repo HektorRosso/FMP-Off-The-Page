@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class Ranged : MonoBehaviour
+public class RangedEnemy : MonoBehaviour
 {
     [Header("Attack Parameters")]
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
+    [SerializeField] private int damage;
 
     [Header("Ranged Attack")]
     [SerializeField] private Transform firepoint;
@@ -18,8 +19,8 @@ public class Ranged : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
 
+    //References
     private Animator anim;
-    private Health playerHealth;
     private EnemyPatrol enemyPatrol;
 
     private void Awake()
@@ -32,16 +33,18 @@ public class Ranged : MonoBehaviour
     {
         cooldownTimer += Time.deltaTime;
 
+        //Attack only when player in sight?
         if (PlayerInSight())
         {
             if (cooldownTimer >= attackCooldown)
             {
                 cooldownTimer = 0;
-                anim.SetBool("playerInRange", true);
+                anim.SetTrigger("playerInRange");
             }
         }
 
-        if (enemyPatrol != null) enemyPatrol.enabled = !PlayerInSight();
+        if (enemyPatrol != null)
+            enemyPatrol.enabled = !PlayerInSight();
     }
 
     private void RangedAttack()
@@ -50,7 +53,6 @@ public class Ranged : MonoBehaviour
         fireballs[FindFireball()].transform.position = firepoint.position;
         fireballs[FindFireball()].GetComponent<EnemyProjectile>().ActivateProjectile();
     }
-
     private int FindFireball()
     {
         for (int i = 0; i < fireballs.Length; i++)
@@ -58,7 +60,6 @@ public class Ranged : MonoBehaviour
             if (!fireballs[i].activeInHierarchy)
                 return i;
         }
-
         return 0;
     }
 

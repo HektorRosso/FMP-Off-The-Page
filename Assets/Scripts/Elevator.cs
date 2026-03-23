@@ -11,6 +11,7 @@ public class Elevator : MonoBehaviour
 
     public float speed;
     bool isElevatorDown;
+    bool hasCollided;
 
     void Update()
     {
@@ -20,7 +21,7 @@ public class Elevator : MonoBehaviour
 
     void StartElevator()
     {
-        if (Vector2.Distance(player.position, elevatorSwitch.position)! > 0f && Input.GetKey("e"))
+        if (Vector2.Distance(player.position, elevatorSwitch.position)! > 0f && Input.GetKey("e") && hasCollided == true)
         {
             if (transform.position.y <= downPos.position.y)
             {
@@ -52,5 +53,15 @@ public class Elevator : MonoBehaviour
         {
             elevator.SetActive(false);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player") hasCollided = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        hasCollided = false;
     }
 }

@@ -4,7 +4,13 @@ public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float resetTime;
+    [SerializeField] SpriteRenderer enemy;
     private float lifetime;
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
 
     public void ActivateProjectile()
     {
@@ -15,7 +21,14 @@ public class EnemyProjectile : MonoBehaviour
     private void Update()
     {
         float movementSpeed = speed * Time.deltaTime;
-        transform.Translate(movementSpeed, 0, 0);
+        if (enemy.flipX == false)
+        {
+            transform.Translate(-movementSpeed, 0, 0);
+        }
+        if (enemy.flipX == true)
+        {
+            transform.Translate(movementSpeed, 0, 0);
+        }
 
         lifetime += Time.deltaTime;
 

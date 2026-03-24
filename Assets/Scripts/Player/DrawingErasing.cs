@@ -8,11 +8,11 @@ public class DrawingErasing : MonoBehaviour
 
     [Header("Settings")]
     public float pointDistance = 0.01f;
+    public float minBrushSize = 0.1f;
+    public float maxBrushSize = 1f;
     [HideInInspector] public float drawRadius;
     [HideInInspector] public float eraseRadius;
     [HideInInspector] public float brushSize;
-    public float minBrushSize = 0.1f;
-    public float maxBrushSize = 1f;
 
     [Header("Visuals")]
     [SerializeField] private GameObject pencil;

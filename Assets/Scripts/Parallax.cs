@@ -19,7 +19,7 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float offset = (player.transform.position.x - playerStartPos) * speed;
-        rend.material.SetTextureOffset("_MainTex", new Vector2(offset, 0f));
+        float offsetX = (player.transform.position.x - playerStartPos) * speed;
+        rend.material.SetTextureOffset("_MainTex", new Vector2(offsetX, 0f));
     }
 }

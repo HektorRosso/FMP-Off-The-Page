@@ -45,7 +45,7 @@ public class Elevator : MonoBehaviour
 
     void UpdateInteraction()
     {
-        if (transform.position.y <= downPos.position.y || transform.position.y >= upPos.position.y)
+        if ((transform.position.y <= downPos.position.y || transform.position.y >= upPos.position.y) && hasCollided)
         {
             elevator.SetActive(true);
         }

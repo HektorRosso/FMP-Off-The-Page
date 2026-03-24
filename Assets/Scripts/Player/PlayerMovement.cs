@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private SpriteRenderer player;
     private Rigidbody2D body;
     private bool grounded;
 
@@ -23,9 +24,9 @@ public class PlayerMovement : MonoBehaviour
         body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
 
         if (horizontalInput > 0.01f)
-            transform.localScale = Vector3.one;
+            player.flipX = false;
         else if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-1,1,1);
+            player.flipX = true;
 
         if (Input.GetKey(KeyCode.Space) && grounded)
             Jump();

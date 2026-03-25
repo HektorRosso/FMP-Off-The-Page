@@ -30,7 +30,6 @@ public class Health : MonoBehaviour
     {
         if (invulnerable) return;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
-        currentHealth -= damage;
 
         if (currentHealth > 0)
         {
@@ -47,12 +46,6 @@ public class Health : MonoBehaviour
                 Respawn();
             }
         }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-            TakeDamage(0.5f);
     }
 
     public void AddHealth(float value)

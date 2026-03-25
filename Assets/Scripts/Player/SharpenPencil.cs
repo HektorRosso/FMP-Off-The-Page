@@ -36,7 +36,7 @@ public class SharpenPencil : MonoBehaviour
 
         float cost = refillPercent * 10;
 
-        sharpenerHeader.text = "This sharpener has " + remainingPercent + "% of power left";
+        sharpenerHeader.text = "This sharpener has " + remainingPercent + "% of lead left";
         sharpenerCost.text = "Refill " + refillPercent + "% for " + cost + " coins";
     }
 

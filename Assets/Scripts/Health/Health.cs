@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
     {
         currentHealth = startingHealth;
         spriteRend = GetComponent<SpriteRenderer>();
-        checkpointSystem = GameObject.Find("GameCanvas").GetComponent<CheckpointSystem>();
+        checkpointSystem = GameObject.Find("CheckpointSystem").GetComponent<CheckpointSystem>();
     }
 
     public void TakeDamage(float damage)

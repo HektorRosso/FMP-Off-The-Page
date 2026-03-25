@@ -8,10 +8,16 @@ public class Elevator : MonoBehaviour
     public Transform upPos;
 
     public GameObject elevator;
+    private Animator anim;
 
     public float speed;
     bool isElevatorDown;
-    bool hasCollided;
+    bool inRange;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -21,7 +27,7 @@ public class Elevator : MonoBehaviour
 
     void StartElevator()
     {
-        if (Vector2.Distance(player.position, elevatorSwitch.position)! > 0f && Input.GetKey("e") && hasCollided == true)
+        if (Vector2.Distance(player.position, elevatorSwitch.position)! > 0f && Input.GetKey("e") && inRange == true)
         {
             if (transform.position.y <= downPos.position.y)
             {
@@ -45,23 +51,29 @@ public class Elevator : MonoBehaviour
 
     void UpdateInteraction()
     {
-        if ((transform.position.y <= downPos.position.y || transform.position.y >= upPos.position.y) && hasCollided)
+        if ((transform.position.y <= downPos.position.y || transform.position.y >= upPos.position.y))
         {
-            elevator.SetActive(true);
+            anim.SetBool("isOn", false);
+
+            if (inRange)
+                elevator.SetActive(true);
+            else
+                elevator.SetActive(false);
         }
         else
         {
+            anim.SetBool("isOn", true);
             elevator.SetActive(false);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") hasCollided = true;
+        if (collision.gameObject.tag == "Player") inRange = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        hasCollided = false;
+        inRange = false;
     }
 }

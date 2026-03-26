@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Health health;
 
+    bool fallDamage;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -38,16 +40,18 @@ public class PlayerMovement : MonoBehaviour
         {
             jumping = true;
 
-            if (maxYVelocity <= -10)
-            {
-                TakeFallDamage();
-            }
+            
         }
         else if (jumping)
         {
             if (body.linearVelocity.y < maxYVelocity)
             {
                 maxYVelocity = body.linearVelocity.y;
+            }
+
+            if (maxYVelocity <= -15)
+            {
+                fallDamage = true; 
             }
         }
     }
@@ -64,12 +68,15 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
+        {
             grounded = true;
+            if (fallDamage) TakeFallDamage();
+        }
     }
 
     public void TakeFallDamage()
     {
         health.TakeDamage(1);
-        Debug.Log("Fall damage");
+        fallDamage = false;
     }
 }

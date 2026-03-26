@@ -4,6 +4,9 @@ public class Credits : MonoBehaviour
 {
     public float scrollSpeed = 1f;
 
+    public float minYPos;
+    public float maxYPos;
+
     private RectTransform rectTransform;
 
     void Start()
@@ -15,13 +18,13 @@ public class Credits : MonoBehaviour
     {
         Vector2 pos = rectTransform.anchoredPosition;
 
-        if (pos.y < 180f)
+        if (pos.y < maxYPos)
         {
             pos.y += scrollSpeed * Time.deltaTime;
         }
         else
         {
-            pos.y = 0f;
+            pos.y = minYPos;
         }
 
         rectTransform.anchoredPosition = pos;

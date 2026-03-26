@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (invulnerable) return;
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, 3);
 
         if (currentHealth > 0)
         {
@@ -50,7 +50,7 @@ public class Health : MonoBehaviour
 
     public void AddHealth(float value)
     {
-        currentHealth = Mathf.Clamp(currentHealth + value, 0, startingHealth);
+        currentHealth = Mathf.Clamp(currentHealth + value, 0, 3);
     }
 
     public void Respawn()

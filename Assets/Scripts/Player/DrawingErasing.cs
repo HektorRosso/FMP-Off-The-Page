@@ -119,6 +119,17 @@ public class DrawingErasing : MonoBehaviour
         if (currentLine == null) return;
 
         Vector3 pos = GetMouseWorld();
+
+        // Check for collider within brush radius
+        Collider2D hit = Physics2D.OverlapCircle(pos, brushSize);
+
+        // If touching something NOT on Default layer, stop drawing
+        if (hit != null && hit.gameObject.layer != LayerMask.NameToLayer("Default"))
+        {
+            StopDrawing();
+            return;
+        }
+
         if (Vector3.Distance(pos, lastPoint) >= pointDistance)
         {
             int count = currentLine.positionCount;
@@ -132,6 +143,7 @@ public class DrawingErasing : MonoBehaviour
 
             inkChecker.ink -= brushSize * 0.01f;
             inkChecker.ink = Mathf.Max(inkChecker.ink, 0f);
+
             if (inkChecker.ink <= 0f)
                 StopDrawing();
         }

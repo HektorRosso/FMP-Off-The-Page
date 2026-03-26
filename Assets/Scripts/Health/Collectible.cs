@@ -16,10 +16,12 @@ public class Collectible : MonoBehaviour
         checkpointSystem = GameObject.Find("CheckpointSystem").GetComponent<CheckpointSystem>();
     }
 
-    private void Update()
+    private void Start()
     {
         isHealth = healthValue > 0f;
         isInk = inkValue > 0f;
+
+        if (isInk) transform.localScale *= inkValue;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

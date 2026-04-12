@@ -123,6 +123,12 @@ public class DrawingErasing : MonoBehaviour
         // Check for collider within brush radius
         Collider2D hit = Physics2D.OverlapCircle(pos, brushSize);
 
+        if (Time.timeScale == 0)
+        {
+            StopDrawing();
+            return;
+        }
+
         // If touching something NOT on Default layer, stop drawing
         if (hit != null && hit.gameObject.layer != LayerMask.NameToLayer("Default"))
         {

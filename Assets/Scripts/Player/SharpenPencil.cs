@@ -5,6 +5,7 @@ public class SharpenPencil : MonoBehaviour
 {
     [HideInInspector] public float sharpenerInk;
     public float sharpenerInkMax = 5;
+    public bool free;
 
     public CheckpointSystem player;
 
@@ -34,10 +35,20 @@ public class SharpenPencil : MonoBehaviour
         float refillPercent = Mathf.RoundToInt((refillAmount / player.inkMax) * 100);
         float remainingPercent = Mathf.RoundToInt((sharpenerInk / player.inkMax) * 100);
 
-        float cost = refillPercent * 10;
+        float cost;
 
         sharpenerHeader.text = "This sharpener has " + remainingPercent + "% of lead left";
-        sharpenerCost.text = "Refill " + refillPercent + "% for " + cost + " coins";
+
+        if (free == true)
+        {
+            cost = 0;
+            sharpenerCost.text = "Refill " + refillPercent + "% for FREE";
+        }
+        else
+        {
+            cost = refillPercent * 10;
+            sharpenerCost.text = "Refill " + refillPercent + "% for " + cost + " coins";
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)

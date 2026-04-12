@@ -60,7 +60,8 @@ public class CheckpointSystem : MonoBehaviour
         if (coins < cost)
             return;
 
-        coins -= cost;
+        if (sharpener.free == false) coins -= cost;
+
         ink += refillAmount;
         sharpener.sharpenerInk -= refillAmount;
 

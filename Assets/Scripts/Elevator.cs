@@ -3,11 +3,12 @@ using UnityEngine;
 public class Elevator : MonoBehaviour
 {
     public Transform player;
+    public Transform elevator;
     public Transform elevatorSwitch;
     public Transform downPos;
     public Transform upPos;
 
-    public GameObject elevator;
+    public GameObject elevatorUI;
     private Animator anim;
 
     public float speed;
@@ -16,7 +17,7 @@ public class Elevator : MonoBehaviour
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        anim = elevator.GetComponent<Animator>();
     }
 
     void Update()
@@ -29,11 +30,11 @@ public class Elevator : MonoBehaviour
     {
         if (Vector2.Distance(player.position, elevatorSwitch.position)! > 0f && Input.GetKey("e") && inRange == true)
         {
-            if (transform.position.y <= downPos.position.y)
+            if (elevator.position.y <= downPos.position.y)
             {
                 isElevatorDown = true;
             }
-            else if (transform.position.y >= upPos.position.y)
+            else if (elevator.position.y >= upPos.position.y)
             {
                 isElevatorDown = false;
             }
@@ -41,38 +42,38 @@ public class Elevator : MonoBehaviour
 
         if (isElevatorDown)
         {
-            transform.position = Vector2.MoveTowards(transform.position, upPos.position, speed * Time.deltaTime);
+            elevator.position = Vector2.MoveTowards(elevator.position, upPos.position, speed * Time.deltaTime);
         }
         else
         {
-            transform.position = Vector2.MoveTowards(transform.position, downPos.position, speed * Time.deltaTime);
+            elevator.position = Vector2.MoveTowards(elevator.position, downPos.position, speed * Time.deltaTime);
         }
     }
 
     void UpdateInteraction()
     {
-        if ((transform.position.y <= downPos.position.y || transform.position.y >= upPos.position.y))
+        if ((elevator.position.y <= downPos.position.y || elevator.position.y >= upPos.position.y))
         {
             anim.SetBool("isOn", false);
 
             if (inRange)
-                elevator.SetActive(true);
+                elevatorUI.SetActive(true);
             else
-                elevator.SetActive(false);
+                elevatorUI.SetActive(false);
         }
         else
         {
             anim.SetBool("isOn", true);
-            elevator.SetActive(false);
+            elevatorUI.SetActive(false);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player") inRange = true;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         inRange = false;
     }

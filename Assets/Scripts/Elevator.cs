@@ -12,7 +12,7 @@ public class Elevator : MonoBehaviour
     private Animator anim;
 
     public float speed;
-    bool isElevatorDown;
+    bool isElevatorDown = true;
     bool inRange;
 
     private void Awake()

@@ -13,8 +13,12 @@ public class PlayerRespawn : MonoBehaviour
 
     public void Respawn()
     {
+        if (currentCheckpoint == null)
+            return;
+
         transform.position = currentCheckpoint.position;
-        playerHealth.Respawn();
+
+        playerHealth.StartCoroutine("Invulnerability");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

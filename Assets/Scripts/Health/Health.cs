@@ -18,12 +18,13 @@ public class Health : MonoBehaviour
     private bool invulnerable;
 
     CheckpointSystem checkpointSystem;
+    private PlayerRespawn playerRespawn;
 
     private void Awake()
     {
         currentHealth = startingHealth;
         spriteRend = GetComponent<SpriteRenderer>();
-        checkpointSystem = GameObject.Find("CheckpointSystem").GetComponent<CheckpointSystem>();
+        playerRespawn = GetComponent<PlayerRespawn>();
     }
 
     public void TakeDamage(float damage)
@@ -31,21 +32,21 @@ public class Health : MonoBehaviour
         if (invulnerable) return;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, 3);
 
-        if (currentHealth > 0)
-        {
-            StartCoroutine(Invulnerability());
-        }
-        else
+        if (currentHealth <= 0)
         {
             if (!dead)
             {
+                dead = true;
+
                 foreach (Behaviour component in components)
                     component.enabled = false;
-
-                dead = true;
-                Respawn();
             }
+
+            return;
         }
+
+        StartCoroutine(Invulnerability());
+        playerRespawn.Respawn();
     }
 
     public void AddHealth(float value)
@@ -59,7 +60,6 @@ public class Health : MonoBehaviour
             return;
 
         dead = false;
-        AddHealth(startingHealth);
         StartCoroutine(Invulnerability());
         transform.position = checkpointSystem.currentCheckpoint.position;
         foreach (Behaviour component in components)

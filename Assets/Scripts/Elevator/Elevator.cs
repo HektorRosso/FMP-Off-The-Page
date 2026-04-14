@@ -2,18 +2,28 @@ using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
+    [Header("Stations")]
+    public BoxCollider2D groundStation;
+    public BoxCollider2D upperStation;
+
+    [Header("Transforms")]
     public Transform player;
     public Transform elevator;
     public Transform elevatorSwitch;
     public Transform downPos;
     public Transform upPos;
 
+    [Header("Game Objects")]
     public GameObject elevatorUI;
+    public GameObject groundOffVisual;
+    public GameObject groundOnVisual;
+    public GameObject upperOffVisual;
+    public GameObject upperOnVisual;
     private Animator anim;
 
     public float speed;
-    bool isElevatorDown = true;
-    bool inRange;
+    [SerializeField] bool isElevatorDown;
+    [HideInInspector] public bool inRange;
 
     private void Awake()
     {
@@ -52,7 +62,9 @@ public class Elevator : MonoBehaviour
 
     void UpdateInteraction()
     {
-        if ((elevator.position.y <= downPos.position.y || elevator.position.y >= upPos.position.y))
+        bool isMoving = !(elevator.position.y <= downPos.position.y || elevator.position.y >= upPos.position.y);
+
+        if (!isMoving)
         {
             anim.SetBool("isOn", false);
 
@@ -66,15 +78,27 @@ public class Elevator : MonoBehaviour
             anim.SetBool("isOn", true);
             elevatorUI.SetActive(false);
         }
+
+        if (!isMoving)
+        {
+            groundOffVisual.SetActive(true);
+            groundOnVisual.SetActive(false);
+
+            upperOffVisual.SetActive(true);
+            upperOnVisual.SetActive(false);
+        }
+        else
+        {
+            groundOffVisual.SetActive(false);
+            groundOnVisual.SetActive(true);
+
+            upperOffVisual.SetActive(false);
+            upperOnVisual.SetActive(true);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void SetInRange(bool value)
     {
-        if (collision.gameObject.tag == "Player") inRange = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        inRange = false;
+        inRange = value;
     }
 }

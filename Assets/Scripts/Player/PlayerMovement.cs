@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip jump;
 
     private Health health;
+    private PlayerRespawn playerRespawn;
 
     bool fallDamage;
 
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         body = GetComponent<Rigidbody2D>();
         health = GetComponent<Health>();
+        playerRespawn = GetComponent<PlayerRespawn>();
     }
 
     private void Update()
@@ -38,9 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!jumping && body.linearVelocity.y == 0)
         {
-            jumping = true;
-
-            
+            jumping = true;   
         }
         else if (jumping)
         {
@@ -78,5 +78,6 @@ public class PlayerMovement : MonoBehaviour
     {
         health.TakeDamage(1);
         fallDamage = false;
+        playerRespawn.Respawn();
     }
 }

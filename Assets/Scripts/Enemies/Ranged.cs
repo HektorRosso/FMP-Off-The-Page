@@ -38,8 +38,6 @@ public class RangedEnemy : MonoBehaviour
     {
         cooldownTimer += Time.deltaTime;
 
-        PlayerInSight();
-
         if (PlayerInSight())
         {
             if (cooldownTimer >= attackCooldown)
@@ -47,7 +45,6 @@ public class RangedEnemy : MonoBehaviour
                 cooldownTimer = 0;
                 anim.SetBool("walking", false);
                 anim.SetTrigger("playerInRange");
-                RangedAttack();
                 Debug.Log("Player detected and attacking");
             }
         }
@@ -62,6 +59,7 @@ public class RangedEnemy : MonoBehaviour
         audioSource.PlayOneShot(zap);
         fireballs[FindFireball()].GetComponent<EnemyProjectile>().ActivateProjectile();
     }
+
     private int FindFireball()
     {
         for (int i = 0; i < fireballs.Length; i++)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Elevator : MonoBehaviour
 {
@@ -19,15 +20,23 @@ public class Elevator : MonoBehaviour
     public GameObject groundOnVisual;
     public GameObject upperOffVisual;
     public GameObject upperOnVisual;
+
     private Animator anim;
 
-    public float speed;
-    [SerializeField] bool isElevatorDown;
+    [Header("Audio")]
+    private AudioSource audioSource;
+    public AudioClip buttonPress;
+
+    [Header("Settings")]
+    public float speed = 2f;
+
+    [SerializeField] private bool moveToUpper;
     [HideInInspector] public bool inRange;
 
     private void Awake()
     {
         anim = elevator.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -38,47 +47,42 @@ public class Elevator : MonoBehaviour
 
     void StartElevator()
     {
-        if (Vector2.Distance(player.position, elevatorSwitch.position)! > 0f && Input.GetKey("e") && inRange == true)
+        // Trigger once per key press
+        if (Input.GetKeyDown(KeyCode.E) && inRange)
         {
-            if (elevator.position.y <= downPos.position.y)
-            {
-                isElevatorDown = true;
-            }
-            else if (elevator.position.y >= upPos.position.y)
-            {
-                isElevatorDown = false;
-            }
+            audioSource.PlayOneShot(buttonPress);
+
+            // Toggle direction
+            moveToUpper = !moveToUpper;
         }
 
-        if (isElevatorDown)
-        {
-            elevator.position = Vector2.MoveTowards(elevator.position, upPos.position, speed * Time.deltaTime);
-        }
-        else
-        {
-            elevator.position = Vector2.MoveTowards(elevator.position, downPos.position, speed * Time.deltaTime);
-        }
+        // Decide target
+        Vector2 target = moveToUpper ? upPos.position : downPos.position;
+
+        // Move elevator
+        elevator.position = Vector2.MoveTowards(
+            elevator.position,
+            target,
+            speed * Time.deltaTime
+        );
     }
 
     void UpdateInteraction()
     {
-        bool isMoving = !(elevator.position.y <= downPos.position.y || elevator.position.y >= upPos.position.y);
+        bool isAtBottom = Vector2.Distance(elevator.position, downPos.position) < 0.01f;
+        bool isAtTop = Vector2.Distance(elevator.position, upPos.position) < 0.01f;
 
-        if (!isMoving)
-        {
-            anim.SetBool("isOn", false);
+        bool isMoving = !(isAtBottom || isAtTop);
 
-            if (inRange)
-                elevatorUI.SetActive(true);
-            else
-                elevatorUI.SetActive(false);
-        }
+        // Animator + UI
+        anim.SetBool("isOn", isMoving);
+
+        if (!isMoving && inRange)
+            elevatorUI.SetActive(true);
         else
-        {
-            anim.SetBool("isOn", true);
             elevatorUI.SetActive(false);
-        }
 
+        // Visual indicators
         if (!isMoving)
         {
             groundOffVisual.SetActive(true);

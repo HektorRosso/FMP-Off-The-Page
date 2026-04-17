@@ -305,6 +305,7 @@ MonoBehaviour:
   upperOffVisual: {fileID: 9073466065171574360}
   upperOnVisual: {fileID: 7933137410481081257}
   buttonPress: {fileID: 8300000, guid: 0480afc608b7de540bb64c29757264f5, type: 3}
+  elevatorMoving: {fileID: 8300000, guid: edaf7ac2414929b49832f9e2caed82d9, type: 3}
   speed: 3
   moveToUpper: 1
   inRange: 0

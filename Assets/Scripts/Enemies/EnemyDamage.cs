@@ -5,6 +5,7 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] protected float damage;
     private AudioSource audioSource;
     public AudioClip hit;
+    public AudioClip playerHurt;
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class EnemyDamage : MonoBehaviour
         {
             collision.GetComponent<Health>().TakeDamage(damage);
             audioSource.PlayOneShot(hit);
+            audioSource.PlayOneShot(playerHurt);
         }
     }
 }

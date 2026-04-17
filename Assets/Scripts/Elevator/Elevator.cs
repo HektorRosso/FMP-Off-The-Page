@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class Elevator : MonoBehaviour
 {
@@ -26,12 +25,15 @@ public class Elevator : MonoBehaviour
     [Header("Audio")]
     private AudioSource audioSource;
     public AudioClip buttonPress;
+    public AudioClip elevatorMoving;
 
     [Header("Settings")]
     public float speed = 2f;
 
     [SerializeField] private bool moveToUpper;
     [HideInInspector] public bool inRange;
+
+    private bool isMovingLastFrame;
 
     private void Awake()
     {
@@ -41,64 +43,88 @@ public class Elevator : MonoBehaviour
 
     void Update()
     {
-        StartElevator();
+        HandleInput();
+        MoveElevator();
         UpdateInteraction();
     }
 
-    void StartElevator()
+    void HandleInput()
     {
-        // Trigger once per key press
-        if (Input.GetKeyDown(KeyCode.E) && inRange)
+        bool isMoving = IsMoving();
+
+        if (Input.GetKeyDown(KeyCode.E) && inRange && !isMoving)
         {
             audioSource.PlayOneShot(buttonPress);
-
-            // Toggle direction
             moveToUpper = !moveToUpper;
         }
+    }
 
-        // Decide target
+    void MoveElevator()
+    {
         Vector2 target = moveToUpper ? upPos.position : downPos.position;
 
-        // Move elevator
-        elevator.position = Vector2.MoveTowards(
-            elevator.position,
-            target,
-            speed * Time.deltaTime
-        );
+        if (Vector2.Distance(elevator.position, target) > 0.01f)
+        {
+            elevator.position = Vector2.MoveTowards(
+                elevator.position,
+                target,
+                speed * Time.deltaTime
+            );
+        }
     }
 
     void UpdateInteraction()
     {
-        bool isAtBottom = Vector2.Distance(elevator.position, downPos.position) < 0.01f;
-        bool isAtTop = Vector2.Distance(elevator.position, upPos.position) < 0.01f;
+        bool isMoving = IsMoving();
 
-        bool isMoving = !(isAtBottom || isAtTop);
-
-        // Animator + UI
+        // Animator
         anim.SetBool("isOn", isMoving);
 
-        if (!isMoving && inRange)
-            elevatorUI.SetActive(true);
-        else
-            elevatorUI.SetActive(false);
+        // UI
+        elevatorUI.SetActive(!isMoving && inRange);
 
-        // Visual indicators
+        // Visuals
         if (!isMoving)
         {
-            groundOffVisual.SetActive(true);
             groundOnVisual.SetActive(false);
-
-            upperOffVisual.SetActive(true);
             upperOnVisual.SetActive(false);
+
+            groundOffVisual.SetActive(true);
+            upperOffVisual.SetActive(true);
         }
         else
         {
-            groundOffVisual.SetActive(false);
             groundOnVisual.SetActive(true);
-
-            upperOffVisual.SetActive(false);
             upperOnVisual.SetActive(true);
+
+            groundOffVisual.SetActive(false);
+            upperOffVisual.SetActive(false);
         }
+
+        // Start moving sound
+        if (isMoving && !isMovingLastFrame)
+        {
+            audioSource.clip = elevatorMoving;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+
+        // Stop moving sound ONLY if it's the movement clip
+        if (!isMoving && isMovingLastFrame)
+        {
+            if (audioSource.clip == elevatorMoving)
+            {
+                audioSource.Stop();
+            }
+        }
+
+        isMovingLastFrame = isMoving;
+    }
+
+    bool IsMoving()
+    {
+        Vector2 target = moveToUpper ? upPos.position : downPos.position;
+        return Vector2.Distance(elevator.position, target) > 0.01f;
     }
 
     public void SetInRange(bool value)

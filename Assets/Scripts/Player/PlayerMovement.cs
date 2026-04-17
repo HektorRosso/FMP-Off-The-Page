@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip jump;
+    public AudioClip playerHurt;
 
     private Health health;
     private PlayerRespawn playerRespawn;
@@ -79,5 +80,6 @@ public class PlayerMovement : MonoBehaviour
         health.TakeDamage(1);
         fallDamage = false;
         playerRespawn.Respawn();
+        maxYVelocity = 0;
     }
 }

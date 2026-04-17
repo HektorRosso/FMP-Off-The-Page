@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip jump;
     public AudioClip playerHurt;
+    public AudioClip impact;
 
     private Health health;
     private PlayerRespawn playerRespawn;
@@ -77,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeFallDamage()
     {
+        audioSource.PlayOneShot(impact);
+        audioSource.PlayOneShot(playerHurt);
         health.TakeDamage(1);
         fallDamage = false;
         playerRespawn.Respawn();

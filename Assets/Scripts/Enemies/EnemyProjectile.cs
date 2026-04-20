@@ -40,4 +40,24 @@ public class EnemyProjectile : MonoBehaviour
         TriggerEnter2D(collision);
         gameObject.SetActive(false);
     }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Ground"))
+        {
+            DrawingErasing drawer = FindFirstObjectByType<DrawingErasing>();
+
+            if (drawer != null)
+            {
+                Vector3 hitPoint = other.ClosestPoint(transform.position);
+
+                float scale = transform.localScale.x;
+                float radius = scale * drawer.minBrushSize;
+
+                drawer.EraseAtPoint(hitPoint, radius);
+
+                gameObject.SetActive(false);
+            }
+        }
+    }
 }

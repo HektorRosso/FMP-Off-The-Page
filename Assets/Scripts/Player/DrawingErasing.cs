@@ -32,11 +32,14 @@ public class DrawingErasing : MonoBehaviour
         mainCamera = Camera.main;
         brushSize = minBrushSize;
         lastBrushSize = brushSize;
+
+        drawRadius = brushSize;
+        eraseRadius = brushSize;
     }
 
     private void Update()
     {
-        HandleBrushSize();   // check brush size first
+        HandleBrushSize();
         HandleDrawing();
         HandleErasing();
         UpdateVisuals();
@@ -54,23 +57,24 @@ public class DrawingErasing : MonoBehaviour
     }
 
     // ============================
-    // BRUSH SIZE (Scroll Wheel)
+    // BRUSH SIZE (Middle Mouse)
     // ============================
     void HandleBrushSize()
     {
         transform.position = GetMouseWorld();
         transform.localScale = Vector3.one * brushSize * 10f;
+
         float scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
         {
             eraser.SetActive(false);
+
             brushSize += scroll * 0.1f;
             brushSize = Mathf.Clamp(brushSize, minBrushSize, maxBrushSize);
 
             drawRadius = brushSize;
             eraseRadius = brushSize;
 
-            // If drawing and brush size changed, start new line segment
             if (currentLine != null && brushSize != lastBrushSize)
             {
                 StopDrawing();
@@ -82,7 +86,7 @@ public class DrawingErasing : MonoBehaviour
     }
 
     // ============================
-    //  DRAWING (Left Click)
+    // DRAWING (Left Mouse)
     // ============================
     void HandleDrawing()
     {
@@ -120,7 +124,6 @@ public class DrawingErasing : MonoBehaviour
 
         Vector3 pos = GetMouseWorld();
 
-        // Check for collider within brush radius
         Collider2D hit = Physics2D.OverlapCircle(pos, brushSize);
 
         if (Time.timeScale == 0)
@@ -129,7 +132,6 @@ public class DrawingErasing : MonoBehaviour
             return;
         }
 
-        // If touching something NOT on Default layer, stop drawing
         if (hit != null && hit.gameObject.layer != LayerMask.NameToLayer("Default"))
         {
             StopDrawing();
@@ -175,15 +177,19 @@ public class DrawingErasing : MonoBehaviour
     }
 
     // ============================
-    //  ERASING (Right Click)
+    // ERASING (Right Mouse)
     // ============================
     void HandleErasing()
     {
         if (!Input.GetMouseButton(1)) return;
 
-        Vector3 erasePos = GetMouseWorld();
+        EraseAtPoint(GetMouseWorld(), eraseRadius);
+    }
 
+    public void EraseAtPoint(Vector3 erasePos, float radius)
+    {
         GameObject[] lines = GameObject.FindGameObjectsWithTag("Ground");
+
         foreach (GameObject lineObj in lines)
         {
             LineRenderer line = lineObj.GetComponent<LineRenderer>();
@@ -191,7 +197,6 @@ public class DrawingErasing : MonoBehaviour
 
             if (line == null) continue;
 
-            // Split line into segments outside erase radius
             List<List<Vector3>> segments = new List<List<Vector3>>();
             List<Vector3> currentSegment = new List<Vector3>();
 
@@ -199,7 +204,7 @@ public class DrawingErasing : MonoBehaviour
             {
                 Vector3 p = line.GetPosition(i);
 
-                if (Vector3.Distance(p, erasePos) > eraseRadius)
+                if (Vector3.Distance(p, erasePos) > radius)
                 {
                     currentSegment.Add(p);
                 }
@@ -207,6 +212,7 @@ public class DrawingErasing : MonoBehaviour
                 {
                     if (currentSegment.Count >= 2)
                         segments.Add(new List<Vector3>(currentSegment));
+
                     currentSegment.Clear();
                 }
             }
@@ -214,21 +220,21 @@ public class DrawingErasing : MonoBehaviour
             if (currentSegment.Count >= 2)
                 segments.Add(currentSegment);
 
-            // Destroy original if fully erased
+            // fully erased
             if (segments.Count == 0)
             {
                 Destroy(lineObj);
                 continue;
             }
 
-            // Update first segment on original line
+            // update original
             line.positionCount = segments[0].Count;
             line.SetPositions(segments[0].ToArray());
 
             if (edge != null)
                 edge.points = ConvertToVector2(segments[0]);
 
-            // Create new line objects for remaining segments
+            // create new segments
             for (int i = 1; i < segments.Count; i++)
             {
                 GameObject newLine = Instantiate(lineObj);

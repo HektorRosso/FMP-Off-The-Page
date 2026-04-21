@@ -42,7 +42,9 @@ public class Health : MonoBehaviour
                     component.enabled = false;
             }
 
-            return;
+            GameOver gameOver = FindFirstObjectByType<GameOver>();
+
+            gameOver.Defeat();
         }
 
         StartCoroutine(Invulnerability());

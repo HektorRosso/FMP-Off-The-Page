@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
     {
         Pause();
     }
+
     public void Pause()
     {
         Time.timeScale = 0f;

@@ -284,8 +284,7 @@ MonoBehaviour:
   range: 2
   damage: 1
   firepoint: {fileID: 8748577217799748874}
-  fireballs:
-  - {fileID: 9050434021200983372}
+  fireballPrefab: {fileID: 9050434021200983372}
   colliderDistance: -2
   boxCollider: {fileID: 8305361812089611241}
   playerLayer:
@@ -548,6 +547,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1797650343564888143}
     m_Modifications:
     - target: {fileID: 2630935784553190085, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630935784553190085, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630935784553190085, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630935784553190085, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6
       objectReference: {fileID: 0}
@@ -587,17 +598,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2630935784553190085, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3557052503258999390, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
       propertyPath: m_FlipX
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7213651905144833189, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
-      propertyPath: hit
-      value: 
-      objectReference: {fileID: 8300000, guid: 69fb2e0a64950d74ab713b39d742adaa, type: 3}
-    - target: {fileID: 7213651905144833189, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
-      propertyPath: damage
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7291408118004059937, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
       propertyPath: enemy

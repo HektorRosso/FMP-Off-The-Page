@@ -7,11 +7,6 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField] SpriteRenderer enemy;
     private float lifetime;
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
-
     public void ActivateProjectile()
     {
         lifetime = 0;
@@ -32,7 +27,7 @@ public class EnemyProjectile : MonoBehaviour
 
         lifetime += Time.deltaTime;
 
-        if (lifetime > resetTime) gameObject.SetActive(false);
+        if (lifetime > resetTime) Destroy(gameObject);
     }
 
     private void TriggerEnter2D(Collider2D collision)
@@ -56,7 +51,7 @@ public class EnemyProjectile : MonoBehaviour
 
                 drawer.EraseAtPoint(hitPoint, radius);
 
-                gameObject.SetActive(false);
+                Destroy(gameObject);
             }
         }
     }

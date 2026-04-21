@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 84.8864, y: 1.875, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca3535f4dca11841a24767d3db2c679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0.5
+  damage: 1
   hit: {fileID: 8300000, guid: 69fb2e0a64950d74ab713b39d742adaa, type: 3}
   playerHurt: {fileID: 8300000, guid: 969d7bd7dbf6e5f40964a3c5592c9e71, type: 3}
 --- !u!82 &-8651453163773599050

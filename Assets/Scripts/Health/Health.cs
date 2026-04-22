@@ -11,7 +11,7 @@ public class Health : MonoBehaviour
     [Header("iFrames")]
     [SerializeField] private float iFramesDuration;
     [SerializeField] private int numberOfFlashes;
-    private SpriteRenderer spriteRend;
+    [SerializeField] private SpriteRenderer spriteRend;
 
     [Header("Components")]
     [SerializeField] private Behaviour[] components;
@@ -23,7 +23,6 @@ public class Health : MonoBehaviour
     private void Awake()
     {
         currentHealth = startingHealth;
-        spriteRend = GetComponent<SpriteRenderer>();
         playerRespawn = GetComponent<PlayerRespawn>();
     }
 

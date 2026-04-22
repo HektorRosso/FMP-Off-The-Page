@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float friction = 0f;
 
     [SerializeField] private SpriteRenderer player;
+    private Animator anim;
 
     private Rigidbody2D body;
     private float inputX;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        anim = GetComponentInChildren<Animator>();
         body = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         health = GetComponent<Health>();
@@ -40,9 +42,9 @@ public class PlayerMovement : MonoBehaviour
         inputX = Input.GetAxis("Horizontal");
 
         if (inputX > 0.01f)
-            player.flipX = false;
-        else if (inputX < -0.01f)
             player.flipX = true;
+        else if (inputX < -0.01f)
+            player.flipX = false;
 
         if (Input.GetKey(KeyCode.Space) && grounded)
             Jump();
@@ -59,11 +61,13 @@ public class PlayerMovement : MonoBehaviour
             if (maxYVelocity <= -15f)
                 fallDamage = true;
         }
+
+        anim.SetBool("jumping", !grounded);
+        anim.SetBool("running", Mathf.Abs(inputX) > 0.1f);
     }
 
     private void FixedUpdate()
     {
-
         body.linearVelocity += new Vector2(inputX * acceleration * Time.fixedDeltaTime,0);
 
         body.linearVelocity = new Vector2(Mathf.Clamp(body.linearVelocity.x, -maxSpeed, maxSpeed),body.linearVelocity.y);

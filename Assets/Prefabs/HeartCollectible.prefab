@@ -149,3 +149,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthValue: 1
   inkValue: 0
+  collectible: {fileID: 8300000, guid: c9e75ea3183ef2647b7d35b993efd901, type: 3}

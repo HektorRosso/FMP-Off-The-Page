@@ -11,8 +11,13 @@ public class Collectible : MonoBehaviour
     private bool isInk;
     CheckpointSystem checkpointSystem;
 
+    [Header("Audio")]
+    private AudioSource audioSource;
+    public AudioClip collectible;
+
     private void Awake()
     {
+        audioSource = GetComponentInParent<AudioSource>();
         checkpointSystem = GameObject.Find("CheckpointSystem").GetComponent<CheckpointSystem>();
     }
 
@@ -30,12 +35,14 @@ public class Collectible : MonoBehaviour
         {
             if (isHealth)
             {
+                audioSource.PlayOneShot(collectible);
                 collision.GetComponent<Health>().AddHealth(healthValue);
                 gameObject.SetActive(false);
             }
 
             if (isInk)
             {
+                audioSource.PlayOneShot(collectible);
                 checkpointSystem.ink += inkValue;
                 gameObject.SetActive(false);
             }

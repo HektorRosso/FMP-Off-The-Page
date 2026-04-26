@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthValue: 0
   inkValue: 1
+  collectible: {fileID: 8300000, guid: c9e75ea3183ef2647b7d35b993efd901, type: 3}
 --- !u!95 &3353822681466342982
 Animator:
   serializedVersion: 7

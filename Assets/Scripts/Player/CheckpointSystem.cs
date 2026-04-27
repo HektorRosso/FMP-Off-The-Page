@@ -15,7 +15,16 @@ public class CheckpointSystem : MonoBehaviour
     public TMP_Text inkText;
     public TMP_Text funds;
 
+    [Header("Audio")]
+    private AudioSource audioSource;
+    public AudioClip sharpen;
+
     [HideInInspector] public Transform currentCheckpoint;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -64,6 +73,8 @@ public class CheckpointSystem : MonoBehaviour
 
         ink += refillAmount;
         sharpener.sharpenerInk -= refillAmount;
+
+        audioSource.PlayOneShot(sharpen);
 
         UpdateFunds();
     }

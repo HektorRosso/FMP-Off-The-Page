@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 2130266708, guid: d0288b80aa96c1d4cb12cf080723975a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthValue: 0
   inkValue: 1
-  collectible: {fileID: 8300000, guid: c9e75ea3183ef2647b7d35b993efd901, type: 3}
+  collectible: {fileID: 8300000, guid: aa22bb2b4cd693b4f9cfac075940d2eb, type: 3}
 --- !u!95 &3353822681466342982
 Animator:
   serializedVersion: 7

@@ -3103,7 +3103,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -675}
+  m_AnchoredPosition: {x: 0, y: -565}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1168647100
@@ -3119,8 +3119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 40
-  minYPos: -675
-  maxYPos: 675
+  minYPos: -565
+  maxYPos: 565
 --- !u!114 &1168647101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3153,7 +3153,6 @@ MonoBehaviour:
 
     Abi Brown
 
-
     Clementine
     Ross
 
@@ -3172,35 +3171,27 @@ MonoBehaviour:
     Alex
     Ursache
 
-
     Daniel Monk
-
 
     Farley Lewis-Cleavely
 
-
     Finn Moran
-
 
     George
     Templeton
 
-
     Iiai Mcdonald
-
 
     KJ Ayeni
 
-
     Kyran Wallace
 
+    Lucas Barrett
 
-    Lucas
-    Barrett
+    Mitch
+    Zarambaite Gorman
 
-
-    Mitch Zarambaite Gorman
-
+    Tevez Matihas
 
     Yerai Graca
 
@@ -3212,21 +3203,22 @@ MonoBehaviour:
     Azharul
     Islam
 
+    Calvin Qi
 
     Curtis Le Blanc
 
-
     Dexter Byrne
 
+    Harry Tyrrell
 
-    Junior Ross
+    Junior
+    Ross
 
+    Mohamed Elhaj
 
-    Mohamed
-    Elhaj
+    Nehan Zaeed
 
-
-    Nehan Zaeed'
+    Yusayrah Rahman'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3beb9f803af95724989904433e7a6e23, type: 2}
   m_sharedMaterial: {fileID: -1321959901150168650, guid: 3beb9f803af95724989904433e7a6e23, type: 2}

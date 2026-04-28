@@ -10,6 +10,6 @@ public class MainMenu : MonoBehaviour
 
     public void City()
     {
-        SceneManager.LoadScene("City");
+        SceneManager.LoadScene("City Of Nylorx");
     }
 }

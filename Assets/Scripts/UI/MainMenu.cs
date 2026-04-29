@@ -8,7 +8,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
-    public void City()
+    public void LevelSelect3D()
+    {
+        SceneManager.LoadScene("Level Select 3D");
+    }
+
+    public void CityOfNylorx()
     {
         SceneManager.LoadScene("City Of Nylorx");
     }

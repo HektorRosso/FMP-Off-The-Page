@@ -21,11 +21,15 @@ public class DrawingErasing : MonoBehaviour
     private LineRenderer currentLine;
     private EdgeCollider2D currentEdge;
     private Vector3 lastPoint;
+    private Vector3 startPoint;
     private Camera mainCamera;
 
     public CheckpointSystem inkChecker;
 
     private float lastBrushSize;
+
+    private bool angleLocked = false;
+    private float lockedAngle;
 
     private void Awake()
     {
@@ -57,7 +61,7 @@ public class DrawingErasing : MonoBehaviour
     }
 
     // ============================
-    // BRUSH SIZE (Middle Mouse)
+    // BRUSH SIZE
     // ============================
     void HandleBrushSize()
     {
@@ -75,10 +79,10 @@ public class DrawingErasing : MonoBehaviour
             drawRadius = brushSize;
             eraseRadius = brushSize;
 
-            if (currentLine != null && brushSize != lastBrushSize)
+            if (currentLine != null)
             {
-                StopDrawing();
-                StartDrawing();
+                currentLine.startWidth = brushSize;
+                currentLine.endWidth = brushSize;
             }
 
             lastBrushSize = brushSize;
@@ -86,7 +90,7 @@ public class DrawingErasing : MonoBehaviour
     }
 
     // ============================
-    // DRAWING (Left Mouse)
+    // DRAWING
     // ============================
     void HandleDrawing()
     {
@@ -112,6 +116,10 @@ public class DrawingErasing : MonoBehaviour
         currentLine.endWidth = brushSize;
 
         Vector3 pos = GetMouseWorld();
+
+        startPoint = pos;
+        angleLocked = false;
+
         currentLine.positionCount = 1;
         currentLine.SetPosition(0, pos);
 
@@ -124,7 +132,31 @@ public class DrawingErasing : MonoBehaviour
 
         Vector3 pos = GetMouseWorld();
 
-        Collider2D hit = Physics2D.OverlapCircle(pos, brushSize);
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            Vector3 dir = pos - startPoint;
+
+            if (dir.magnitude > 0.05f)
+            {
+                float angle = Mathf.Atan2(dir.y, dir.x);
+
+                if (!angleLocked)
+                {
+                    lockedAngle = Mathf.Round(angle / (Mathf.PI / 4f)) * (Mathf.PI / 4f);
+                    angleLocked = true;
+                }
+
+                float length = dir.magnitude;
+
+                Vector3 snappedDir = new Vector3(
+                    Mathf.Cos(lockedAngle),
+                    Mathf.Sin(lockedAngle),
+                    0f
+                ) * length;
+
+                pos = startPoint + snappedDir;
+            }
+        }
 
         if (Time.timeScale == 0)
         {
@@ -132,6 +164,7 @@ public class DrawingErasing : MonoBehaviour
             return;
         }
 
+        Collider2D hit = Physics2D.OverlapCircle(pos, brushSize);
         if (hit != null && hit.gameObject.layer != LayerMask.NameToLayer("Default"))
         {
             StopDrawing();
@@ -161,6 +194,8 @@ public class DrawingErasing : MonoBehaviour
     {
         currentLine = null;
         currentEdge = null;
+
+        angleLocked = false;
     }
 
     void UpdateEdgeCollider(LineRenderer line, EdgeCollider2D edge)
@@ -177,7 +212,7 @@ public class DrawingErasing : MonoBehaviour
     }
 
     // ============================
-    // ERASING (Right Mouse)
+    // ERASING
     // ============================
     void HandleErasing()
     {
@@ -220,26 +255,26 @@ public class DrawingErasing : MonoBehaviour
             if (currentSegment.Count >= 2)
                 segments.Add(currentSegment);
 
-            // fully erased
             if (segments.Count == 0)
             {
                 Destroy(lineObj);
                 continue;
             }
 
-            // update original
             line.positionCount = segments[0].Count;
             line.SetPositions(segments[0].ToArray());
 
             if (edge != null)
                 edge.points = ConvertToVector2(segments[0]);
 
-            // create new segments
             for (int i = 1; i < segments.Count; i++)
             {
-                GameObject newLine = Instantiate(lineObj);
+                GameObject newLine = Instantiate(drawPrefab);
                 LineRenderer newLineRenderer = newLine.GetComponent<LineRenderer>();
                 EdgeCollider2D newEdge = newLine.GetComponent<EdgeCollider2D>();
+
+                newLineRenderer.startWidth = brushSize;
+                newLineRenderer.endWidth = brushSize;
 
                 newLineRenderer.positionCount = segments[i].Count;
                 newLineRenderer.SetPositions(segments[i].ToArray());

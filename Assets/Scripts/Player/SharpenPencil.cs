@@ -42,12 +42,12 @@ public class SharpenPencil : MonoBehaviour
         if (free == true)
         {
             cost = 0;
-            sharpenerCost.text = "Refill " + refillPercent + "% for FREE";
+            sharpenerCost.text = "Click me to refill " + refillPercent + "% for FREE";
         }
         else
         {
             cost = refillPercent * 10;
-            sharpenerCost.text = "Refill " + refillPercent + "% for " + cost + " coins";
+            sharpenerCost.text = "Click me to refill " + refillPercent + "% for " + cost + " coins";
         }
     }
 

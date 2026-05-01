@@ -4,6 +4,11 @@ public class PageTurn : MonoBehaviour
 {
     public GameObject targetObject;
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
+
     public void ShowObject()
     {
         if (targetObject != null)

@@ -19,6 +19,11 @@ public class PlayerMovement3D : MonoBehaviour
 
     bool isGrounded;
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
+
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -37,7 +42,7 @@ public class PlayerMovement3D : MonoBehaviour
 
         bool isMoving = Mathf.Abs(x) > minMoveThreshold || Mathf.Abs(z) > minMoveThreshold;
 
-        if (isMoving && isGrounded)
+        if (isMoving && isGrounded && Time.timeScale == 1f)
         {
             if (!audioSource.isPlaying)
             {

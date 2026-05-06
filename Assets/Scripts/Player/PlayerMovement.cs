@@ -37,6 +37,11 @@ public class PlayerMovement : MonoBehaviour
         playerRespawn = GetComponent<PlayerRespawn>();
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     private void Update()
     {
         inputX = Input.GetAxis("Horizontal");

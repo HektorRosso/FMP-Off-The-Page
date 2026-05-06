@@ -142,17 +142,13 @@ public class DrawingErasing : MonoBehaviour
 
                 if (!angleLocked)
                 {
-                    lockedAngle = Mathf.Round(angle / (Mathf.PI / 4f)) * (Mathf.PI / 4f);
+                    lockedAngle = Mathf.Round(angle / (Mathf.PI / 360f)) * (Mathf.PI / 360f);
                     angleLocked = true;
                 }
 
                 float length = dir.magnitude;
 
-                Vector3 snappedDir = new Vector3(
-                    Mathf.Cos(lockedAngle),
-                    Mathf.Sin(lockedAngle),
-                    0f
-                ) * length;
+                Vector3 snappedDir = new Vector3(Mathf.Cos(lockedAngle), Mathf.Sin(lockedAngle), 0f) * length;
 
                 pos = startPoint + snappedDir;
             }

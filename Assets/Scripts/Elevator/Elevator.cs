@@ -31,7 +31,7 @@ public class Elevator : MonoBehaviour
     public float speed = 2f;
 
     [SerializeField] private bool moveToUpper;
-    [HideInInspector] public bool inRange;
+    [HideInInspector] private bool inRange;
 
     private bool isMovingLastFrame;
 
@@ -65,11 +65,7 @@ public class Elevator : MonoBehaviour
 
         if (Vector2.Distance(elevator.position, target) > 0.01f)
         {
-            elevator.position = Vector2.MoveTowards(
-                elevator.position,
-                target,
-                speed * Time.deltaTime
-            );
+            elevator.position = Vector2.MoveTowards(elevator.position,target,speed * Time.deltaTime);
         }
     }
 

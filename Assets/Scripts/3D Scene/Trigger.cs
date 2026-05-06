@@ -4,6 +4,7 @@ public class Trigger : MonoBehaviour
 {
     [SerializeField] private GameObject interactionText;
     [SerializeField] private KeyCode interactKey = KeyCode.E;
+    [SerializeField] private GameObject[] gameObjects;
 
     public GameObject levelSelect;
 
@@ -33,6 +34,15 @@ public class Trigger : MonoBehaviour
 
     private void Interact()
     {
+        foreach (GameObject obj in gameObjects)
+        {
+            if (obj != null)
+            {
+                obj.SetActive(false);
+            }
+        }
+
+        Time.timeScale = 0f;
         Debug.Log("Interacted!");
         levelSelect.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
@@ -49,7 +59,29 @@ public class Trigger : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+
+            if (interactionText != null)
+                interactionText.SetActive(true);
+        }
+    }
+
     private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+
+            if (interactionText != null)
+                interactionText.SetActive(false);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {

@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] private float acceleration = 25f;
-    [SerializeField] private float maxSpeed = 7.5f;
-    [SerializeField] private float friction = 0f;
-
+    [SerializeField] private float speed = 7.5f;
     [SerializeField] private SpriteRenderer player;
     private Animator anim;
 
@@ -45,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         inputX = Input.GetAxis("Horizontal");
+        body.linearVelocity = new Vector2(inputX * speed, body.linearVelocity.y);
 
         if (inputX > 0.01f)
             player.flipX = true;
@@ -71,25 +68,12 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("running", Mathf.Abs(inputX) > 0.1f);
     }
 
-    private void FixedUpdate()
-    {
-        body.linearVelocity += new Vector2(inputX * acceleration * Time.fixedDeltaTime,0);
-
-        body.linearVelocity = new Vector2(Mathf.Clamp(body.linearVelocity.x, -maxSpeed, maxSpeed),body.linearVelocity.y);
-
-        if (Mathf.Abs(inputX) < 0.01f)
-        {
-            body.linearVelocity = new Vector2(Mathf.Lerp(body.linearVelocity.x, 0, friction * Time.fixedDeltaTime),body.linearVelocity.y);
-        }
-    }
-
     private void Jump()
     {
         jumping = true;
         audioSource.PlayOneShot(jump);
         maxYVelocity = 0;
-
-        body.linearVelocity = new Vector2(body.linearVelocity.x, 8f);
+        body.linearVelocity = new Vector2(body.linearVelocity.x, speed);
         grounded = false;
     }
 
@@ -108,10 +92,8 @@ public class PlayerMovement : MonoBehaviour
     {
         audioSource.PlayOneShot(impact);
         audioSource.PlayOneShot(playerHurt);
-
         health.TakeDamage(1);
         playerRespawn.Respawn();
-
         fallDamage = false;
         maxYVelocity = 0;
     }

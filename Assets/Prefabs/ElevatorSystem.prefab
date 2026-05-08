@@ -306,9 +306,8 @@ MonoBehaviour:
   upperOnVisual: {fileID: 7933137410481081257}
   buttonPress: {fileID: 8300000, guid: 0480afc608b7de540bb64c29757264f5, type: 3}
   elevatorMoving: {fileID: 8300000, guid: edaf7ac2414929b49832f9e2caed82d9, type: 3}
-  speed: 3
+  speed: 6
   moveToUpper: 1
-  inRange: 0
 --- !u!82 &1928369515110304306
 AudioSource:
   m_ObjectHideFlags: 0
@@ -666,12 +665,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1805019104, guid: 565503a19c8af6a44bdcb80c6e8ce84b, type: 3}
+  m_Sprite: {fileID: -1708968179, guid: 565503a19c8af6a44bdcb80c6e8ce84b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10.543728, y: 4.8599997}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -711,12 +710,12 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.8}
+  m_Offset: {x: 0, y: 1.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.53, y: 3.5168555}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 10.543728, y: 4.8599997}
+    newSize: {x: 10.543728, y: 4.8599997}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

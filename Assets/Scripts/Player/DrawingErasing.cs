@@ -257,6 +257,11 @@ public class DrawingErasing : MonoBehaviour
                 continue;
             }
 
+            float originalWidth = line.startWidth;
+
+            line.startWidth = originalWidth;
+            line.endWidth = originalWidth;
+
             line.positionCount = segments[0].Count;
             line.SetPositions(segments[0].ToArray());
 
@@ -266,17 +271,21 @@ public class DrawingErasing : MonoBehaviour
             for (int i = 1; i < segments.Count; i++)
             {
                 GameObject newLine = Instantiate(drawPrefab);
+
                 LineRenderer newLineRenderer = newLine.GetComponent<LineRenderer>();
                 EdgeCollider2D newEdge = newLine.GetComponent<EdgeCollider2D>();
 
-                newLineRenderer.startWidth = brushSize;
-                newLineRenderer.endWidth = brushSize;
+                newLineRenderer.startWidth = originalWidth;
+                newLineRenderer.endWidth = originalWidth;
 
                 newLineRenderer.positionCount = segments[i].Count;
                 newLineRenderer.SetPositions(segments[i].ToArray());
 
                 if (newEdge != null)
+                {
                     newEdge.points = ConvertToVector2(segments[i]);
+                    newEdge.edgeRadius = originalWidth * 0.5f;
+                }
             }
         }
     }

@@ -12,7 +12,9 @@ public class CheckpointSystem : MonoBehaviour
     public float coins;
 
     [Header("UI")]
-    public TMP_Text inkText;
+    public TMP_Text leadText;
+    public Transform leadBar;
+    public float leadbarWidth;
     public TMP_Text funds;
 
     [Header("Audio")]
@@ -28,21 +30,44 @@ public class CheckpointSystem : MonoBehaviour
 
     void Start()
     {
-        UpdateInk();
+        UpdateLead();
         UpdateFunds();
     }
 
     void Update()
     {
         if (ink != lastInk)
-            UpdateInk();
+            UpdateLead();
     }
 
-    void UpdateInk()
+    void SetLead()
     {
-        float percent = Mathf.RoundToInt((ink / inkMax) * 100);
-        inkText.text = percent + "%";
+        float newWidth = (ink / inkMax) * leadbarWidth;
+        leadBar.localScale = new Vector3(newWidth, 1f, 1f);
+    }
+
+    void UpdateLead()
+    {
+        float normalized = ink / inkMax;
+        float percent = Mathf.RoundToInt(normalized * 100);
+
+        leadText.text = percent + "%";
+
+        if (normalized > 0.5f)
+        {
+            leadText.color = Color.Lerp(Color.yellow, Color.green, (normalized - 0.5f) * 2f);
+        }
+        else if (normalized > 0.25f)
+        {
+            leadText.color = Color.Lerp(Color.red, Color.yellow, (normalized - 0.25f) * 4f);
+        }
+        else
+        {
+            leadText.color = Color.Lerp(Color.black, Color.red, normalized * 4f);
+        }
+
         lastInk = ink;
+        SetLead();
     }
 
     void UpdateFunds()

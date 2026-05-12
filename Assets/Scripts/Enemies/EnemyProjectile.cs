@@ -4,8 +4,14 @@ public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float resetTime;
-    [SerializeField] SpriteRenderer enemy;
+    [SerializeField] Transform enemy;
+    private SpriteRenderer spriteRenderer;
     private float lifetime;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void ActivateProjectile()
     {
@@ -16,12 +22,14 @@ public class EnemyProjectile : MonoBehaviour
     private void Update()
     {
         float movementSpeed = speed * Time.deltaTime;
-        if (enemy.flipX == false)
+        if (enemy.localScale.x == 1f)
         {
+            spriteRenderer.flipX = false;
             transform.Translate(-movementSpeed, 0, 0);
         }
-        if (enemy.flipX == true)
+        else
         {
+            spriteRenderer.flipX = true;
             transform.Translate(movementSpeed, 0, 0);
         }
 

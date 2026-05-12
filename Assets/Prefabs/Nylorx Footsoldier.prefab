@@ -609,7 +609,7 @@ PrefabInstance:
     - target: {fileID: 7291408118004059937, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 5722548140452464721}
+      objectReference: {fileID: 6907838384383591896}
     - target: {fileID: 8070418939500991104, guid: b14e96a07512243408df5e24b4f9f986, type: 3}
       propertyPath: m_Name
       value: NylorxBullet

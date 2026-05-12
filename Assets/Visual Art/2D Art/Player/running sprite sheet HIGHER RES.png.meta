@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 75042fd1e3d5576489727863c145a7bf
+guid: c7e295e5013d1f94f975010bbb93fa5a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 62.5
+  spritePixelsToUnits: 150
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,331 +136,331 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: running sprite sheet NEW_0
+      name: running sprite sheet HIGHER RES_0
       rect:
         serializedVersion: 2
-        x: 100
-        y: 11
-        width: 160
-        height: 160
+        x: 0
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2702075e9c5334c4bbd106e0de3879e6
-      internalID: 2082799745
+      spriteID: 66f3d69646da8f44297ffa05ab5ff596
+      internalID: -922041174
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_1
+      name: running sprite sheet HIGHER RES_1
       rect:
         serializedVersion: 2
-        x: 471
-        y: 2
-        width: 162
-        height: 158
+        x: 920
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15dc270d198cb864d80ace2762c8b682
-      internalID: 822890107
+      spriteID: 3b82d1397d29dbd40845bdedcdf126f3
+      internalID: 1573383196
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_2
+      name: running sprite sheet HIGHER RES_2
       rect:
         serializedVersion: 2
-        x: 840
-        y: 2
-        width: 143
-        height: 158
+        x: 1840
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f78cecc4791a9e145943344623648cd6
-      internalID: 2012577343
+      spriteID: 86ea1ea5fa086be4d92215271a732fb5
+      internalID: 1395363791
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_3
+      name: running sprite sheet HIGHER RES_3
       rect:
         serializedVersion: 2
-        x: 1226
-        y: 4
-        width: 108
-        height: 162
+        x: 2760
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ea7577be58003442b9e89ca53587183
-      internalID: -1518445758
+      spriteID: 859b106a3c3ef69418506d77fc95d72d
+      internalID: 999601321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_4
+      name: running sprite sheet HIGHER RES_4
       rect:
         serializedVersion: 2
-        x: 1582
-        y: 2
-        width: 116
-        height: 164
+        x: 3680
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6d19c0c28d2bbd40aa132e4cf066133
-      internalID: 71557544
+      spriteID: aaba649cd294c7145aacc256e0b70783
+      internalID: -370570464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_5
+      name: running sprite sheet HIGHER RES_5
       rect:
         serializedVersion: 2
-        x: 1938
-        y: 4
-        width: 142
-        height: 161
+        x: 4600
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36b80f701449aa3478b8b0556045d87d
-      internalID: -1515246477
+      spriteID: affb76cbf7a10014a80ecad24ea205f8
+      internalID: 1382970467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_6
+      name: running sprite sheet HIGHER RES_6
       rect:
         serializedVersion: 2
-        x: 2303
-        y: 12
-        width: 151
-        height: 154
+        x: 5520
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdd25fb8b7f4d8e47aecc29825ed8e81
-      internalID: 817361733
+      spriteID: bc3f55d862b88c9459290d58dccfbd8e
+      internalID: -1485192691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_7
+      name: running sprite sheet HIGHER RES_7
       rect:
         serializedVersion: 2
-        x: 2669
-        y: 26
-        width: 157
-        height: 137
+        x: 6440
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52eddf77a39529c41b4f44ffde003748
-      internalID: 1419759675
+      spriteID: f576adaf6efa245419f45ffc40842878
+      internalID: -273433692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_9
+      name: running sprite sheet HIGHER RES_9
       rect:
         serializedVersion: 2
-        x: 3047
-        y: 12
-        width: 157
-        height: 148
+        x: 8280
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89fe9d35123ecea40946ca744415db2e
-      internalID: -892476139
+      spriteID: a5bd6a1934f3a484087cc504741dc252
+      internalID: 213978174
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_10
+      name: running sprite sheet HIGHER RES_10
       rect:
         serializedVersion: 2
-        x: 3419
-        y: 2
-        width: 162
-        height: 156
+        x: 9200
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68a1d2136c2edba4498548034ea2b74d
-      internalID: 1561206568
+      spriteID: 20ee3edf89408d24997be95841bbac8f
+      internalID: 539414195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_11
+      name: running sprite sheet HIGHER RES_11
       rect:
         serializedVersion: 2
-        x: 3797
-        y: 1
-        width: 132
-        height: 162
+        x: 10120
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eea164e99522c6742a2f6c53b657a083
-      internalID: 1926443334
+      spriteID: 3ef778ce642c4fc49be77171d4029ad6
+      internalID: -295024983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_12
+      name: running sprite sheet HIGHER RES_12
       rect:
         serializedVersion: 2
-        x: 4169
-        y: 1
-        width: 111
-        height: 165
+        x: 11040
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e97d58b359790014e970072b45178956
-      internalID: -76839295
+      spriteID: f73dbbd0c06a27e4fae48505cdeb0071
+      internalID: 1071704560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_13
+      name: running sprite sheet HIGHER RES_13
       rect:
         serializedVersion: 2
-        x: 4531
-        y: 4
-        width: 110
-        height: 162
+        x: 11960
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 010a9ec745404ac4ea581b52de4791be
-      internalID: -1070721601
+      spriteID: efa7992f47f02d74fb02ad381dfb6e2e
+      internalID: -1824946304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_14
+      name: running sprite sheet HIGHER RES_14
       rect:
         serializedVersion: 2
-        x: 4885
-        y: 4
-        width: 142
-        height: 167
+        x: 12880
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5404c19615337144b9662b52e75a1465
-      internalID: 1704961265
+      spriteID: 70589b2bf4c6caa479234bee50a1e2d0
+      internalID: 1782406514
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: running sprite sheet NEW_15
+      name: running sprite sheet HIGHER RES_8
       rect:
         serializedVersion: 2
-        x: 5251
-        y: 10
-        width: 151
-        height: 161
+        x: 7360
+        y: 0
+        width: 920
+        height: 532
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66b5d3e4a5f290d4d8bed098ab7c3e11
-      internalID: -1246828689
+      spriteID: 1673a00a31cc33845bffd9a008ee2746
+      internalID: -1956444930
       vertices: []
       indices: 
       edges: []
@@ -469,7 +469,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c22ba824d5400634fa96721c51d877bb
+    spriteID: cdb1d1eda4baed24b9564b13a4f670c6
     internalID: 0
     vertices: []
     indices: 
@@ -479,26 +479,23 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":15.0,"y":1.0},"gridSpriteSize":{"x":920.0,"y":532.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      running sprite sheet NEW_0: 2082799745
-      running sprite sheet NEW_1: 822890107
-      running sprite sheet NEW_10: 1561206568
-      running sprite sheet NEW_11: 1926443334
-      running sprite sheet NEW_12: -76839295
-      running sprite sheet NEW_13: -1070721601
-      running sprite sheet NEW_14: 1704961265
-      running sprite sheet NEW_15: -1246828689
-      running sprite sheet NEW_16: -728741397
-      running sprite sheet NEW_17: 130519496
-      running sprite sheet NEW_2: 2012577343
-      running sprite sheet NEW_3: -1518445758
-      running sprite sheet NEW_4: 71557544
-      running sprite sheet NEW_5: -1515246477
-      running sprite sheet NEW_6: 817361733
-      running sprite sheet NEW_7: 1419759675
-      running sprite sheet NEW_8: -1119320513
-      running sprite sheet NEW_9: -892476139
+      running sprite sheet HIGHER RES_0: -922041174
+      running sprite sheet HIGHER RES_1: 1573383196
+      running sprite sheet HIGHER RES_10: 539414195
+      running sprite sheet HIGHER RES_11: -295024983
+      running sprite sheet HIGHER RES_12: 1071704560
+      running sprite sheet HIGHER RES_13: -1824946304
+      running sprite sheet HIGHER RES_14: 1782406514
+      running sprite sheet HIGHER RES_2: 1395363791
+      running sprite sheet HIGHER RES_3: 999601321
+      running sprite sheet HIGHER RES_4: -370570464
+      running sprite sheet HIGHER RES_5: 1382970467
+      running sprite sheet HIGHER RES_6: -1485192691
+      running sprite sheet HIGHER RES_7: -273433692
+      running sprite sheet HIGHER RES_8: -1956444930
+      running sprite sheet HIGHER RES_9: 213978174
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

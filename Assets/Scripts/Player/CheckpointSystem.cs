@@ -36,6 +36,8 @@ public class CheckpointSystem : MonoBehaviour
 
     void Update()
     {
+        if (ink > inkMax) ink = inkMax;
+
         if (ink != lastInk)
             UpdateLead();
     }

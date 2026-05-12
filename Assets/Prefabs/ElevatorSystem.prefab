@@ -306,7 +306,7 @@ MonoBehaviour:
   upperOnVisual: {fileID: 7933137410481081257}
   buttonPress: {fileID: 8300000, guid: 0480afc608b7de540bb64c29757264f5, type: 3}
   elevatorMoving: {fileID: 8300000, guid: edaf7ac2414929b49832f9e2caed82d9, type: 3}
-  speed: 6
+  speed: 9
   moveToUpper: 1
 --- !u!82 &1928369515110304306
 AudioSource:
@@ -598,6 +598,7 @@ GameObject:
   - component: {fileID: 4515440995117292145}
   - component: {fileID: 1172037414870749029}
   - component: {fileID: 6782394167460322927}
+  - component: {fileID: 303211654076266747}
   m_Layer: 7
   m_Name: Elevator
   m_TagString: Ground
@@ -763,6 +764,18 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &303211654076266747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726280516937242066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30173656d333a34ab1816e62ecc5949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7933137410481081257
 GameObject:
   m_ObjectHideFlags: 0

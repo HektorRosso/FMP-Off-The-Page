@@ -31,9 +31,9 @@ public class Elevator : MonoBehaviour
     public float speed = 2f;
 
     [SerializeField] private bool moveToUpper;
-    [HideInInspector] private bool inRange;
+    private bool inRange;
 
-    private bool isMovingLastFrame;
+    bool isMovingLastFrame;
 
     private void Awake()
     {

@@ -11,6 +11,9 @@ public class UFOAnimation : MonoBehaviour
     [SerializeField] private Transform abductPoint;
     [SerializeField] private GameObject ufoCamera;
 
+    [Header("Demo Screen")]
+    [SerializeField] private GameObject demoScreen;
+
     private void Awake()
     {
         playerMovement2D = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
@@ -22,13 +25,19 @@ public class UFOAnimation : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerMovement2D.enabled = false;
-            StartCoroutine(Abduction());
+            StartCoroutine(StartAbduction());
         }
+    }
+
+    public IEnumerator StartAbduction()
+    {
+        ufoAnim.SetInteger("currentFrame", 1);
+        yield return null;
     }
 
     IEnumerator Abduction()
     {
-        ufoAnim.SetInteger("currentFrame", 1);
+        ufoAnim.SetInteger("currentFrame", 2);
 
         Vector3 startPos = playerMove.position;
         Vector3 startScale = visualScale.localScale;
@@ -42,22 +51,29 @@ public class UFOAnimation : MonoBehaviour
 
             float t = timer / duration;
 
-            playerMove.position = Vector3.Lerp(startPos,abductPoint.position,t);
+            playerMove.position = Vector3.Lerp(startPos, abductPoint.position, t);
 
-            visualScale.localScale = Vector3.Lerp(startScale,Vector3.zero,t);
+            visualScale.localScale = Vector3.Lerp(startScale, Vector3.zero, t);
 
             yield return null;
         }
 
         ufoCamera.SetActive(true);
 
-        ufoAnim.SetInteger("currentFrame", 2);
+        ufoAnim.SetInteger("currentFrame", 3);
 
         yield return null;
     }
 
     public void FlyAway()
     {
-        ufoAnim.SetInteger("currentFrame", 3);
+        ufoAnim.SetInteger("currentFrame", 4);
+    }
+
+    public void Demo()
+    {
+        Time.timeScale = 0f;
+        gameObject.SetActive(false);
+        demoScreen.SetActive(true);
     }
 }

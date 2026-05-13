@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PageTurn : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class PageTurn : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1f;
+        Unfreeze();
     }
 
     public void ShowObject()
@@ -24,5 +25,20 @@ public class PageTurn : MonoBehaviour
     public void HideSelf()
     {
         gameObject.SetActive(false);
+    }
+
+    public void Freeze()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void Unfreeze()
+    {
+        Time.timeScale = 1f;
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }

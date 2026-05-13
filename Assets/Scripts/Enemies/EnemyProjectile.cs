@@ -46,7 +46,7 @@ public class EnemyProjectile : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Ground"))
+        if (other.CompareTag("DrawnGround"))
         {
             DrawingErasing drawer = FindFirstObjectByType<DrawingErasing>();
 
@@ -55,7 +55,7 @@ public class EnemyProjectile : MonoBehaviour
                 Vector3 hitPoint = other.ClosestPoint(transform.position);
 
                 float scale = transform.localScale.x;
-                float radius = scale * drawer.minBrushSize;
+                float radius = scale * drawer.maxBrushSize;
 
                 drawer.EraseAtPoint(hitPoint, radius);
 

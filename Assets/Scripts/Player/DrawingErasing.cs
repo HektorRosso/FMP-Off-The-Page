@@ -219,7 +219,7 @@ public class DrawingErasing : MonoBehaviour
 
     public void EraseAtPoint(Vector3 erasePos, float radius)
     {
-        GameObject[] lines = GameObject.FindGameObjectsWithTag("Ground");
+        GameObject[] lines = GameObject.FindGameObjectsWithTag("DrawnGround");
 
         foreach (GameObject lineObj in lines)
         {

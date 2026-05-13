@@ -79,12 +79,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("DrawnGround"))
         {
             grounded = true;
 
-            if (fallDamage)
+            if (collision.gameObject.CompareTag("DrawnGround"))
+            {
+                fallDamage = false;
+                maxYVelocity = 0;
+            }
+
+            if (fallDamage && collision.gameObject.CompareTag("Ground"))
+            {
                 TakeFallDamage();
+            }
         }
     }
 

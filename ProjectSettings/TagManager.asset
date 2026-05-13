@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Checkpoint
   - Projectile
+  - DrawnGround
   layers:
   - Default
   - TransparentFX

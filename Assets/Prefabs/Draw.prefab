@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 165496974859456022}
   m_Layer: 0
   m_Name: Draw
-  m_TagString: Ground
+  m_TagString: DrawnGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

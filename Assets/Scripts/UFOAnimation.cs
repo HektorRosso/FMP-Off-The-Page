@@ -11,6 +11,12 @@ public class UFOAnimation : MonoBehaviour
     [SerializeField] private Transform abductPoint;
     [SerializeField] private GameObject ufoCamera;
 
+    [Header("Audio")]
+    private AudioSource ufoAudioSource;
+    public AudioClip ufoAudioClip;
+
+    private bool hasPlayedSFX;
+
     [Header("Demo Screen")]
     [SerializeField] private GameObject demoScreen;
 
@@ -18,6 +24,12 @@ public class UFOAnimation : MonoBehaviour
     {
         playerMovement2D = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         ufoAnim = GetComponent<Animator>();
+        ufoAudioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        hasPlayedSFX = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,6 +39,14 @@ public class UFOAnimation : MonoBehaviour
             playerMovement2D.enabled = false;
             StartCoroutine(StartAbduction());
         }
+    }
+
+    public void PlaySFX()
+    {
+        if (hasPlayedSFX) return;
+
+        hasPlayedSFX = true;
+        ufoAudioSource.PlayOneShot(ufoAudioClip);
     }
 
     public IEnumerator StartAbduction()

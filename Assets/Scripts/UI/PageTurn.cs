@@ -5,11 +5,6 @@ public class PageTurn : MonoBehaviour
 {
     public GameObject targetObject;
 
-    private void Start()
-    {
-        Unfreeze();
-    }
-
     public void ShowObject()
     {
         if (targetObject != null)
@@ -40,5 +35,10 @@ public class PageTurn : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void CityOfNylorx()
+    {
+        SceneManager.LoadScene("City Of Nylorx");
     }
 }

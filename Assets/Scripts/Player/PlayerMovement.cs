@@ -64,7 +64,8 @@ public class PlayerMovement : MonoBehaviour
                 fallDamage = true;
         }
 
-        anim.SetBool("jumping", !grounded);
+        anim.SetBool("jumping", body.linearVelocity.y > 0.1f);
+        anim.SetBool("falling", body.linearVelocity.y < -0.1f);
         anim.SetBool("running", Mathf.Abs(inputX) > 0.1f);
     }
 

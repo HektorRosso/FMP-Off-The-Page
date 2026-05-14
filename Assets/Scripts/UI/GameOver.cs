@@ -3,6 +3,8 @@ using UnityEngine;
 public class GameOver : MonoBehaviour
 {
     [SerializeField] private GameObject gameOver;
+    [SerializeField] private GameObject gameOverMusic;
+    [SerializeField] private GameObject mainMusic;
 
     private void Start()
     {
@@ -16,5 +18,7 @@ public class GameOver : MonoBehaviour
         pauseMenu.Pause();
 
         gameOver.SetActive(true);
+        gameOverMusic.SetActive(true);
+        mainMusic.SetActive(false);
     }
 }

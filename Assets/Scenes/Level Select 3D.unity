@@ -616,7 +616,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Find your comic books
+  m_text: Go to your desk and find your comic books
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 315d2062ee939bf458c08f201c0bec2c, type: 2}
   m_sharedMaterial: {fileID: -7049449071961975993, guid: 315d2062ee939bf458c08f201c0bec2c, type: 2}

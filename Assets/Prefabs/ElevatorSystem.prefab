@@ -306,7 +306,7 @@ MonoBehaviour:
   upperOnVisual: {fileID: 7933137410481081257}
   buttonPress: {fileID: 8300000, guid: 0480afc608b7de540bb64c29757264f5, type: 3}
   elevatorMoving: {fileID: 8300000, guid: edaf7ac2414929b49832f9e2caed82d9, type: 3}
-  speed: 9
+  speed: 12
   moveToUpper: 1
 --- !u!82 &1928369515110304306
 AudioSource:
